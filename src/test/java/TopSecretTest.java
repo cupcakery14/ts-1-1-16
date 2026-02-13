@@ -1,16 +1,17 @@
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.*;
-public class TopSecretTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class TopSecretTest {
+
     @Test
-    void shouldCallRunOnProgramController(){
-
-        ProgramController mockController = mock(ProgramController.class);
-        when(mockController.run(any())).thenReturn("Test Output");
-
-        TopSecret topSecret = new TopSecret(mockController);
-        String[] args = {"1"};
-        topSecret.start(args);
-        verify(mockController).run(args);
+    void getArgs_returnsSameReference() {
+        String[] args = {"01", "key"};
+        assertSame(args, TopSecret.getArgs(args));
+    }
+    @Test
+    void getArgs_emptyArray() {
+        String[] args = {};
+        assertArrayEquals(new String[]{}, TopSecret.getArgs(args));
     }
 }
